@@ -1,0 +1,65 @@
+[
+  {
+    "current_status": {
+      "vehicleDensity": 0.2,
+      "averageSpeed": 30.0,
+      "weather": "sunny"
+    },
+    "predicted_status": [
+      {
+        "estimated_time": 10000,
+        "predictions": { "vehicleDensity": 0.3, "averageSpeed": 40.0, "weather": "clouded" }
+      },
+      {
+        "estimated_time": 20000,
+        "predictions": { "vehicleDensity": 0.4, "averageSpeed": 50.0, "weather": "light rain" }
+      },
+      {
+        "estimated_time": 30000,
+        "predictions": { "vehicleDensity": 0.5, "averageSpeed": 60.0, "weather": "heavy rain" }
+      }
+    ]
+  },
+  {
+    "current_status": {
+      "vehicleDensity": 0.4,
+      "averageSpeed": 55.0,
+      "weather": "clouded"
+    },
+    "predicted_status": [
+      {
+        "estimated_time": 8000,
+        "predictions": { "vehicleDensity": 0.55, "averageSpeed": 65.0, "weather": "foggy" }
+      },
+      {
+        "estimated_time": 16000,
+        "predictions": { "vehicleDensity": 0.7, "averageSpeed": 75.0, "weather": "light rain" }
+      },
+      {
+        "estimated_time": 25000,
+        "predictions": { "vehicleDensity": 0.8, "averageSpeed": 85.0, "weather": "heavy rain" }
+      }
+    ]
+  },
+  {
+    "current_status": {
+      "vehicleDensity": 0.65,
+      "averageSpeed": 75.0,
+      "weather": "foggy"
+    },
+    "predicted_status": [
+      {
+        "estimated_time": 7000,
+        "predictions": { "vehicleDensity": 0.8, "averageSpeed": 85.0, "weather": "light rain" }
+      },
+      {
+        "estimated_time": 14000,
+        "predictions": { "vehicleDensity": 0.9, "averageSpeed": 95.0, "weather": "heavy rain" }
+      },
+      {
+        "estimated_time": 20000,
+        "predictions": { "vehicleDensity": 1.0, "averageSpeed": 100.0, "weather": "heavy rain" }
+      }
+    ]
+  }
+]

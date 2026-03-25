@@ -34,7 +34,7 @@ O projeto inclui o arquivo de configuração pronto em `mockoon/vbl-traffic-api.
 **Passo a passo:**
 
 1. Abra o **Mockoon**
-2. Clique em **File → Open local environment**
+2. Clique em **File → Open local environment** ou no ícone [+]
 3. Selecione o arquivo `mockoon/vbl-traffic-api.json` na raiz do repositório
 4. Clique em **▶ Start server**
 

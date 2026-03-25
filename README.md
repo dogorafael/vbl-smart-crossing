@@ -2,7 +2,7 @@
 
 Protótipo desenvolvido como resposta ao desafio técnico **Game Developer Pleno** do Centro de Pesquisas Avançadas Wernher von Braun.
 
-Uma releitura do clássico Frogger onde o tráfego e o clima **não são aleatórios** — eles são determinados em tempo real por uma API REST de predição de tráfego. O jogador controla um personagem que deve atravessar uma via expressa dentro de um tempo limite, enquanto as condições da via se agravam automaticamente conforme as predições da API se concretizam.
+Uma releitura do clássico Frogger onde o tráfego e o clima **não são aleatórios** , eles são determinados em tempo real por uma API REST de predição de tráfego. O jogador controla um personagem que deve atravessar uma via expressa dentro de um tempo limite, enquanto as condições da via se agravam automaticamente conforme as predições da API se concretizam.
 
 ---
 

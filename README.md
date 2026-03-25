@@ -10,7 +10,7 @@ Uma releitura do clássico Frogger onde o tráfego e o clima **não são aleató
 
 | Ferramenta | Versão utilizada |
 |---|---|
-| Unity | **6.3.9f1** |
+| Unity | **6000.3.9f1** |
 | Mockoon | 9.x ou superior |
 | Git | Qualquer versão recente |
 
@@ -62,7 +62,7 @@ O mock está configurado em modo **SEQUENTIAL** — cada chamada retorna um cen�
 1. Abra o **Unity Hub**
 2. Clique em **Add → Add project from disk**
 3. Selecione a pasta raiz do repositório clonado
-4. Certifique-se de que o Unity Hub usa a versão **6.3.9f1** para abrir o projeto, se abrir com uma versão relativamente recente e precisar converter o projeto não deve ter problemas
+4. Certifique-se de que o Unity Hub usa a versão **6000.3.9f1** para abrir o projeto, se abrir com uma versão relativamente recente e precisar converter o projeto não deve ter problemas
 5. Aguarde a importação dos pacotes (primeira abertura pode demorar alguns minutos)
 
 ---

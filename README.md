@@ -21,7 +21,7 @@ Uma releitura do clássico Frogger onde o tráfego e o clima **não são aleató
 ## 1 — Clonar o repositório
 
 ```bash
-git clone https://github.com/<seu-usuario>/vbl-smart-crossing.git
+git clone https://github.com/dogorafael/vbl-smart-crossing.git
 cd vbl-smart-crossing
 ```
 
@@ -53,7 +53,7 @@ O mock está configurado em modo **SEQUENTIAL** — cada chamada retorna um cen�
 | 3ª (Nível 3) | Neblina | 0.65 | 75 km/h |
 | 4ª em diante | Reinicia do Nível 1 | — | — |
 
-> **Sem o Mockoon:** o jogo possui um fallback embutido (`Assets/Resources/MockData/vbl-traffic-fallback.json`) com os mesmos 3 cenários. Se a API não responder, ele é carregado automaticamente e o jogo funciona normalmente.
+> **Sem o Mockoon:** o jogo possui um fallback embutido (`Assets/Resources/MockData/vbl-traffic-fallback.json`) com os mesmos 3 cenários. Se a API não responder, ele é carregado automaticamente e o jogo funciona normalmente. Um fallback adicional também foi implementado caso a leitura do JSON local também falhe, nesse caso um caso único é carregado diretamente do código para a aplicação não deixar de rodar. Fica explícito nos logs do console da Unity de onde os dados foram carregados.
 
 ---
 
@@ -62,7 +62,7 @@ O mock está configurado em modo **SEQUENTIAL** — cada chamada retorna um cen�
 1. Abra o **Unity Hub**
 2. Clique em **Add → Add project from disk**
 3. Selecione a pasta raiz do repositório clonado
-4. Certifique-se de que o Unity Hub usa a versão **6.3.9f1** para abrir o projeto
+4. Certifique-se de que o Unity Hub usa a versão **6.3.9f1** para abrir o projeto, se abrir com uma versão relativamente recente e precisar converter o projeto não deve ter problemas
 5. Aguarde a importação dos pacotes (primeira abertura pode demorar alguns minutos)
 
 ---
@@ -71,7 +71,8 @@ O mock está configurado em modo **SEQUENTIAL** — cada chamada retorna um cen�
 
 1. No **Project** panel, abra a cena `Assets/Scenes/SmartCrossing.unity`
 2. Certifique-se de que o **Mockoon está rodando** (passo 2)
-3. Pressione **▶ Play**
+3. Ajuste o display para usar resolução FullHD(1920x1080) ou relativo para uma melhor experiência
+4. Pressione **▶ Play**
 
 **Controles:**
 
@@ -103,7 +104,7 @@ Todas as fórmulas seguem exatamente a especificação do desafio:
 | Intervalo de spawn dos veículos | `1 / vehicleDensity` |
 | Velocidade dos veículos na engine | `(averageSpeed / 100) × ReferenceSpeed` |
 | Velocidade do jogador | `BaseSpeed × weather_multiplier` |
-| Duração do cronômetro | `último predicted_status.estimated_time ÷ 1000` (ms → s) |
+| Duração do cronômetro | `último predicted_status.estimated_time ÷ 1000` (ms -> s) |
 | Agendamento de predições | `WaitForSeconds(estimated_time / 1000f)` |
 
 **Multiplicadores de clima:**
@@ -145,6 +146,7 @@ O projeto adota separação estrita entre **camada de dados** e **camada de visu
 - **Event Bus estático** — nenhum sistema conhece diretamente os outros; adicionar ou remover um sistema não quebra os demais
 - **PredictionScheduler usa coroutines com `WaitForSeconds`** — sensível ao `Time.timeScale`, então pausar o jogo pausa as predições automaticamente
 - **Fallback em `Resources/`** carregado sob demanda — o JSON só é lido do disco se a API falhar, e apenas uma vez (cached em memória nas chamadas seguintes)
+- **Zero Singletons** — todos os sistemas se comunicam via eventos (`GameEvents`) ou recebem referências via Inspector, garantindo baixo acoplamento e facilitando testes.
 
 ---
 

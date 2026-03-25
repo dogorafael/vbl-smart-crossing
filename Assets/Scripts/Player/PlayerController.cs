@@ -48,7 +48,7 @@ namespace VBLSmartCrossing.Player
             GameEvents.OnApiDataLoaded += HandleApiDataLoaded;
             GameEvents.OnLevelCompleted += DisableMovement;
             GameEvents.OnGameOver += DisableMovement;
-            GameEvents.OnGameReset += ResetToSpawn;
+            GameEvents.OnBeforeLevelLoad += ResetToSpawn;
         }
 
         private void OnDisable()
@@ -56,7 +56,7 @@ namespace VBLSmartCrossing.Player
             GameEvents.OnApiDataLoaded -= HandleApiDataLoaded;
             GameEvents.OnLevelCompleted -= DisableMovement;
             GameEvents.OnGameOver -= DisableMovement;
-            GameEvents.OnGameReset -= ResetToSpawn;
+            GameEvents.OnBeforeLevelLoad -= ResetToSpawn;
         }
 
         // - Movement -

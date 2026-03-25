@@ -22,14 +22,14 @@ namespace VBLSmartCrossing.Core
         private void OnEnable()
         {
             GameEvents.OnApiDataLoaded += HandleApiDataLoaded;
-            GameEvents.OnGameReset += CancelAll;
+            GameEvents.OnBeforeLevelLoad += CancelAll;
             GameEvents.OnGameOver += CancelAll;
         }
 
         private void OnDisable()
         {
             GameEvents.OnApiDataLoaded -= HandleApiDataLoaded;
-            GameEvents.OnGameReset -= CancelAll;
+            GameEvents.OnBeforeLevelLoad -= CancelAll;
             GameEvents.OnGameOver -= CancelAll;
         }
 

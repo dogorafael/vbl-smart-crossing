@@ -14,9 +14,8 @@ namespace VBLSmartCrossing.UI
 
         private void OnClick()
         {
-            GameEvents.RaiseGameReset();
-            // Fire-and-forget: método async mas não precisamos esperar, evita warning
-            _ = LevelManager.Instance.LoadInitialLevelAsync();
+            GameEvents.RaiseBeforeLevelLoad();
+            GameEvents.RaiseRequestStartGame();
         }
     }
 }

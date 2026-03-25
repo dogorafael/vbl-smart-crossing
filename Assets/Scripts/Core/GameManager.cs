@@ -12,31 +12,18 @@ namespace VBLSmartCrossing.Core
     {
         // - Properties -
         public enum GameState { Idle, Loading, Playing, LevelComplete, GameOver }
-        public GameState CurrentState { get; private set; } = GameState.Idle;
-        public static GameManager Instance { get; private set; }
+        public GameState CurrentState { get; private set; } = GameState.Idle;        
 
         private float _timerDuration;
         private float _timeRemaining;
         private Coroutine _timerCoroutine;        
 
-        // - Unity lifecycle -
-
-        private void Awake()
-        {
-            // Singleton 
-            if (Instance != null && Instance != this)
-            {
-                Destroy(gameObject);
-                return;
-            }
-            Instance = this;
-        }
+        // - Unity lifecycle -        
 
         private void Start()
         {
-            TransitionTo(GameState.Loading);
-            // Fire-and-forget: método async mas não precisamos esperar, evita warning
-            _ = LevelManager.Instance.LoadInitialLevelAsync(); 
+            TransitionTo(GameState.Loading);            
+            GameEvents.RaiseRequestStartGame();
         }
 
         private void OnEnable()
@@ -45,7 +32,7 @@ namespace VBLSmartCrossing.Core
             GameEvents.OnLevelCompleted += HandleLevelCompleted;
             GameEvents.OnTimeOut += HandleTimeOut;
             GameEvents.OnGameOver += HandleGameOver;
-            GameEvents.OnGameReset += HandleGameReset;
+            GameEvents.OnBeforeLevelLoad += HandleGameReset;
         }
 
         private void OnDisable()
@@ -54,7 +41,7 @@ namespace VBLSmartCrossing.Core
             GameEvents.OnLevelCompleted -= HandleLevelCompleted;
             GameEvents.OnTimeOut -= HandleTimeOut;
             GameEvents.OnGameOver -= HandleGameOver;
-            GameEvents.OnGameReset -= HandleGameReset;
+            GameEvents.OnBeforeLevelLoad -= HandleGameReset;
         }
 
         // - Event handlers -

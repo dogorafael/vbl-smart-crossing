@@ -13,8 +13,7 @@ namespace VBLSmartCrossing.Core
     public class LevelManager : MonoBehaviour
     {
         // - Properties -
-        public int CurrentLevel { get; private set; } = 1;
-        public static LevelManager Instance;
+        public int CurrentLevel { get; private set; } = 1;       
         private ApiService _apiService;
         //Fallback (caso a chamada a API falhe)
         private List<TrafficResponse> _fallbackScenarios;        
@@ -23,32 +22,22 @@ namespace VBLSmartCrossing.Core
 
         private void Awake()
         {
-            _apiService = new ApiService();
-            //Singleton
-            if (Instance != null && Instance != this)
-            {
-                Destroy(gameObject);
-                return;
-            }
-            Instance = this;
+            _apiService = new ApiService();           
         }
 
         private void OnEnable()
         {
+            GameEvents.OnRequestStartGame += HandleStartGame;
             GameEvents.OnLevelCompleted += HandleLevelCompleted;
         }
 
         private void OnDisable()
         {
+            GameEvents.OnRequestStartGame -= HandleStartGame;
             GameEvents.OnLevelCompleted -= HandleLevelCompleted;
         }
-
-        // - Public API -
-
-        /// <summary>
-        /// Chamado pelo GameManager no Start para inicializar o primeiro nível e também ao clicar "Jogar Novamente".
-        /// </summary>
-        public async Task LoadInitialLevelAsync()
+                       
+        private async Task LoadInitialLevelAsync()
         {            
             Debug.Log("[LevelManager] Carregando dados do level inicial...");
             CurrentLevel = 1;
@@ -57,6 +46,11 @@ namespace VBLSmartCrossing.Core
         }
 
         // - Event handlers -
+
+        private void HandleStartGame()
+        {
+            _ = LoadInitialLevelAsync();
+        }
 
         private void HandleLevelCompleted()
         {
@@ -72,7 +66,7 @@ namespace VBLSmartCrossing.Core
         {            
             // Pausa breve para que o texto "Nível Completo" fique visível antes do reset
             await Task.Delay(1800);
-            GameEvents.RaiseGameReset();
+            GameEvents.RaiseBeforeLevelLoad();
             
             // Pequeno delay adicional para o sistema terminar de resetar
             await Task.Delay(300);
@@ -96,7 +90,7 @@ namespace VBLSmartCrossing.Core
 
             if (data == null)
             {                
-                Debug.LogError("[LevelManager] JSON local também falhou ou carregar, obtendo dados hardcoded.");
+                Debug.LogError("[LevelManager] JSON local também falhou ao carregar, obtendo dados hardcoded.");
                 data = BuildFallbackData();
             }
 

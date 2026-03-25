@@ -37,7 +37,10 @@ namespace VBLSmartCrossing.Core
         public static event Action<float> OnTimerTick;
 
         /// <summary>Disparado entre os níveis para resetar todos os sistemas antes de carregar a próxima chamada da API.</summary>
-        public static event Action OnGameReset;
+        public static event Action OnBeforeLevelLoad;
+        /// <summary>Disparado ao iniciar ou reiniciar o jogo.</summary>
+        public static event Action OnRequestStartGame;
+
 
         // - Event Dispatchers - 
 
@@ -48,6 +51,7 @@ namespace VBLSmartCrossing.Core
         public static void RaiseGameOver() => OnGameOver?.Invoke();
         public static void RaiseLevelChanged(int level) => OnLevelChanged?.Invoke(level);
         public static void RaiseTimerTick(float remaining) => OnTimerTick?.Invoke(remaining);
-        public static void RaiseGameReset() => OnGameReset?.Invoke();
+        public static void RaiseBeforeLevelLoad() => OnBeforeLevelLoad?.Invoke();
+        public static void RaiseRequestStartGame() => OnRequestStartGame?.Invoke();
     }
 }

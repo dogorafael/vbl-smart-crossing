@@ -49,7 +49,7 @@ namespace VBLSmartCrossing.UI
             GameEvents.OnTimerTick += UpdateTimer;
             GameEvents.OnLevelCompleted += ShowLevelComplete;
             GameEvents.OnGameOver += ShowGameOver;
-            GameEvents.OnGameReset += HandleReset;
+            GameEvents.OnBeforeLevelLoad += HandleReset;
         }
 
         private void OnDisable()
@@ -60,7 +60,7 @@ namespace VBLSmartCrossing.UI
             GameEvents.OnTimerTick -= UpdateTimer;
             GameEvents.OnLevelCompleted -= ShowLevelComplete;
             GameEvents.OnGameOver -= ShowGameOver;
-            GameEvents.OnGameReset -= HandleReset;
+            GameEvents.OnBeforeLevelLoad -= HandleReset;
         }
 
         // - Event handlers -

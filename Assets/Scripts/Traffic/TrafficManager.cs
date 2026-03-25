@@ -60,7 +60,7 @@ namespace VBLSmartCrossing.Traffic
             GameEvents.OnStatusChanged += HandleStatusChanged;
             GameEvents.OnLevelCompleted += StopTraffic;
             GameEvents.OnGameOver += StopTraffic;
-            GameEvents.OnGameReset += ClearAll;
+            GameEvents.OnBeforeLevelLoad += ClearAll;
         }
 
         private void OnDisable()
@@ -69,7 +69,7 @@ namespace VBLSmartCrossing.Traffic
             GameEvents.OnStatusChanged -= HandleStatusChanged;
             GameEvents.OnLevelCompleted -= StopTraffic;
             GameEvents.OnGameOver -= StopTraffic;
-            GameEvents.OnGameReset -= ClearAll;
+            GameEvents.OnBeforeLevelLoad -= ClearAll;
         }
 
         // - Event handlers -
@@ -85,8 +85,7 @@ namespace VBLSmartCrossing.Traffic
         // - Traffic control -
 
         private void ApplyStatus(Status status)
-        {
-            print("APPLY STATUS");
+        {            
             _currentDensity = status.vehicleDensity;
             _currentSpeed   = status.averageSpeed;
 
